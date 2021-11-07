@@ -1,10 +1,12 @@
 #include "game.h"
-#include "display.h"
+#include "graphics/display.h"
+#include "util/log.h"
 
 int Game::exec()
 {
     // Display setup
-    Display::createWindow(&window);
+    Util::Log::write("Initializing BlockGame...");
+    Graphics::Display::createWindow(&window);
 
     // Game loop
     while(!glfwWindowShouldClose(window)) {
@@ -15,6 +17,8 @@ int Game::exec()
         glfwPollEvents();
     }
 
+    Graphics::Display::terminate();
+    Util::Log::write("Exiting...");
     return 0;
 }
 

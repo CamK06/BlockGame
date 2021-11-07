@@ -3,7 +3,7 @@
 
 #include "display.h"
 
-namespace Display
+namespace Graphics::Display
 {
 
 void createWindow(GLFWwindow** window)
@@ -20,6 +20,11 @@ void createWindow(GLFWwindow** window)
 
     // Initialize GLEW
     glewInit();
+}
+
+void terminate()
+{
+    glfwTerminate();
 }
 
 void windowSizeUpdated(GLFWwindow* window, int x, int y)

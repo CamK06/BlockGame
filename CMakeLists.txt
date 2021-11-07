@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 3.2)
 project(blockgame)
 
-file(GLOB SOURCES "src/*.cpp")
+file(GLOB SOURCES "src/*.cpp" "src/**/*.cpp")
 
 set(OpenGL_GL_PREFERENCE GLVND)
 
