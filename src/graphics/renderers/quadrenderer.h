@@ -4,6 +4,7 @@
 #include <GLFW/glfw3.h>
 
 #include "../shader.h"
+#include "../texture.h"
 
 namespace Graphics
 {
@@ -15,8 +16,12 @@ public:
     void render();
 
 private:
-    float* vertexes;
     Shader* shader;
+    Texture* texture;
+
+    unsigned int VAO;
+    unsigned int VBO;
+    unsigned int EBO;
 };
 
 }

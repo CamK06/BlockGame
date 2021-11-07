@@ -8,6 +8,7 @@ set(OpenGL_GL_PREFERENCE GLVND)
 find_package(OpenGL REQUIRED)
 find_package(GLEW REQUIRED)
 find_package(glfw3 REQUIRED)
+find_package(glm REQUIRED)
 
 add_executable(blockgame ${SOURCES})
-target_link_libraries(blockgame glfw GLEW::GLEW OpenGL::GL)
+target_link_libraries(blockgame glfw GLEW::GLEW OpenGL::GL glm::glm)
