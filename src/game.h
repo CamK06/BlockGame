@@ -1,6 +1,9 @@
 #pragma once
 
+#include <GL/glew.h>
 #include <GLFW/glfw3.h>
+
+#include "graphics/renderers/quadrenderer.h"
 
 class Game
 {
@@ -13,4 +16,5 @@ private:
     void pollButtons();
 
     GLFWwindow* window;
+    Graphics::QuadRenderer* quad;
 };

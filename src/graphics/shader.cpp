@@ -13,6 +13,8 @@ namespace Graphics
 Shader::Shader(const char* vertexPath, const char* fragmentPath)
 {
     // Initial variables for loading
+    std::string vertexCode;
+    std::string fragmentCode;
     std::ifstream vertShaderFile;
     std::ifstream fragShaderFile;
     std::stringstream vertShaderStream;
@@ -31,8 +33,10 @@ Shader::Shader(const char* vertexPath, const char* fragmentPath)
     fragShaderFile.close();
 
     // Convert streams into strings of code
-    const char* vertShaderCode = vertShaderStream.str().c_str();
-    const char* fragShaderCode = fragShaderStream.str().c_str();
+    vertexCode = vertShaderStream.str();
+    fragmentCode = fragShaderStream.str();
+    const char* vertShaderCode = vertexCode.c_str();
+    const char* fragShaderCode = fragmentCode.c_str();
 
     // Initial variables for compilation
     unsigned int vertexShader;

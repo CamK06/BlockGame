@@ -1,5 +1,5 @@
 #include "game.h"
-#include "graphics/display.h"
+#include "graphics/util/display.h"
 #include "util/log.h"
 
 int Game::exec()
@@ -7,6 +7,7 @@ int Game::exec()
     // Display setup
     Log::write("Initializing BlockGame...");
     Graphics::Display::createWindow(&window);
+    quad = new Graphics::QuadRenderer();
 
     // Game loop
     while(!glfwWindowShouldClose(window)) {
@@ -35,6 +36,7 @@ void Game::render()
     glClear(GL_COLOR_BUFFER_BIT);
 
     // Draw stuff
+    quad->render();
 }
 
 void Game::pollButtons()

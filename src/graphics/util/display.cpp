@@ -15,11 +15,13 @@ void createWindow(GLFWwindow** window)
     glfwWindowHint(GL_MAJOR_VERSION, 3);
     *window = glfwCreateWindow(WIDTH, HEIGHT, "BlockGame", NULL, NULL);
     glfwMakeContextCurrent(*window);
-    glViewport(0, 0, WIDTH, HEIGHT);
     glfwSetWindowSizeCallback(*window, windowSizeUpdated);
 
     // Initialize GLEW
     glewInit();
+
+    // Direct OpenGL stuff
+    glViewport(0, 0, WIDTH, HEIGHT);
 }
 
 void terminate()
