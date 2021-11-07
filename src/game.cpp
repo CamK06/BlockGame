@@ -5,7 +5,7 @@
 int Game::exec()
 {
     // Display setup
-    Util::Log::write("Initializing BlockGame...");
+    Log::write("Initializing BlockGame...");
     Graphics::Display::createWindow(&window);
 
     // Game loop
@@ -17,8 +17,9 @@ int Game::exec()
         glfwPollEvents();
     }
 
+    // Exit
     Graphics::Display::terminate();
-    Util::Log::write("Exiting...");
+    Log::write("Exiting...");
     return 0;
 }
 

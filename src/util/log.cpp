@@ -4,7 +4,7 @@
 #include <iomanip>
 #include <ctime>
 
-namespace Util::Log
+namespace Log
 {
 
 void write(const char* message)

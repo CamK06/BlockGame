@@ -47,8 +47,8 @@ Shader::Shader(const char* vertexPath, const char* fragmentPath)
     glGetShaderiv(vertexShader, GL_COMPILE_STATUS, &succeeded);
     if(!succeeded) {
         glGetShaderInfoLog(vertexShader, 512, NULL, infoLog);
-        Util::Log::write("VERTEX SHADER COMPILATION FAILED!");
-        Util::Log::write(infoLog);
+        Log::write("VERTEX SHADER COMPILATION FAILED!");
+        Log::write(infoLog);
     }
 
     // Compile the fragment shader
@@ -58,8 +58,8 @@ Shader::Shader(const char* vertexPath, const char* fragmentPath)
     glGetShaderiv(fragmentShader, GL_COMPILE_STATUS, &succeeded);
     if(!succeeded) {
         glGetShaderInfoLog(vertexShader, 512, NULL, infoLog);
-        Util::Log::write("FRAGMENT SHADER COMPILATION FAILED!");
-        Util::Log::write(infoLog);
+        Log::write("FRAGMENT SHADER COMPILATION FAILED!");
+        Log::write(infoLog);
     }
 
     // Create the shader program
@@ -70,8 +70,8 @@ Shader::Shader(const char* vertexPath, const char* fragmentPath)
     glGetProgramiv(ID, GL_LINK_STATUS, &succeeded);
     if(!succeeded) {
         glGetProgramInfoLog(ID, 512, NULL, infoLog);
-        Util::Log::write("SHADER LINKING FAILED!");
-        Util::Log::write(infoLog);
+        Log::write("SHADER LINKING FAILED!");
+        Log::write(infoLog);
     }
     
     // Delete shaders

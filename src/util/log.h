@@ -2,7 +2,7 @@
 
 // TODO: Add advanced logging functions
 
-namespace Util::Log
+namespace Log
 {
 
 void write(const char* message);
