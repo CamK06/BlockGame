@@ -39,7 +39,7 @@ CubeRenderer::CubeRenderer()
     glBindVertexArray(0);
 }
 
-void CubeRenderer::render(glm::vec3 pos)
+void CubeRenderer::render(glm::vec3 pos, Camera* camera)
 {
     shader->use();
     texture->use();
@@ -60,7 +60,7 @@ void CubeRenderer::render(glm::vec3 pos)
     unsigned int modelLoc = glGetUniformLocation(shader->ID, "model");
     glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
     unsigned int viewLoc = glGetUniformLocation(shader->ID, "view");
-    glUniformMatrix4fv(viewLoc, 1, GL_FALSE, glm::value_ptr(view));
+    glUniformMatrix4fv(viewLoc, 1, GL_FALSE, glm::value_ptr(camera->view));
     unsigned int projectionLoc = glGetUniformLocation(shader->ID, "projection");
     glUniformMatrix4fv(projectionLoc, 1, GL_FALSE, glm::value_ptr(projection));
 

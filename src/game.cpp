@@ -8,6 +8,9 @@ int Game::exec()
     Log::write("Initializing BlockGame...");
     Graphics::Display::createWindow(&window);
     cube = new Graphics::CubeRenderer();
+    camera = new Graphics::Camera(glm::vec3(0.0f, 0.0f, 3.0f));
+    glfwSetWindowUserPointer(window, camera);
+    glfwSetCursorPosCallback(window, camera->mouse);
 
     // Game loop
     while(!glfwWindowShouldClose(window)) {
@@ -26,7 +29,12 @@ int Game::exec()
 
 void Game::update()
 {
+    // Calculate deltaTime
+    float currentFrame = glfwGetTime();
+    deltaTime = currentFrame - lastFrame;
+    lastFrame = currentFrame;
 
+    camera->update();
 }
 
 void Game::render()
@@ -36,7 +44,11 @@ void Game::render()
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
     // Draw stuff
-    cube->render(glm::vec3(0, 0, -5));
+    cube->render(glm::vec3(0, 0, 0), camera);
+    cube->render(glm::vec3(1, 0, 0), camera);
+    cube->render(glm::vec3(-1, 0, 0), camera);
+    cube->render(glm::vec3(0, 1, 0), camera);
+    cube->render(glm::vec3(0, -1, 0), camera);
 }
 
 void Game::pollButtons()
@@ -44,4 +56,6 @@ void Game::pollButtons()
     // Escape to exit
     if(glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS)
         glfwSetWindowShouldClose(window, true);
+    
+    camera->input(window, deltaTime);
 }

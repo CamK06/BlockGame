@@ -6,6 +6,7 @@
 
 #include "../shader.h"
 #include "../texture.h"
+#include "../camera.h"
 
 namespace Graphics
 {
@@ -14,7 +15,7 @@ class CubeRenderer
 {
 public:
     CubeRenderer();
-    void render(glm::vec3 pos);
+    void render(glm::vec3 pos, Camera* camera);
 
 private:
     Shader* shader;

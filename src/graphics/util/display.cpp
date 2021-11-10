@@ -16,6 +16,7 @@ void createWindow(GLFWwindow** window)
     *window = glfwCreateWindow(WIDTH, HEIGHT, "BlockGame", NULL, NULL);
     glfwMakeContextCurrent(*window);
     glfwSetWindowSizeCallback(*window, windowSizeUpdated);
+    glfwSetInputMode(*window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
 
     // Initialize GLEW
     glewInit();
