@@ -2,6 +2,7 @@
 
 #include <GL/glew.h>
 #include <GLFW/glfw3.h>
+#include <glm/vec3.hpp>
 
 #include "../shader.h"
 #include "../texture.h"
@@ -13,7 +14,7 @@ class CubeRenderer
 {
 public:
     CubeRenderer();
-    void render();
+    void render(glm::vec3 pos);
 
 private:
     Shader* shader;

@@ -23,6 +23,7 @@ void createWindow(GLFWwindow** window)
     // Direct OpenGL stuff
     glViewport(0, 0, WIDTH, HEIGHT);
     glEnable(GL_DEPTH_TEST);
+    //glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
 }
 
 void terminate()

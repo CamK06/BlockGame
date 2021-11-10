@@ -39,14 +39,15 @@ CubeRenderer::CubeRenderer()
     glBindVertexArray(0);
 }
 
-void CubeRenderer::render()
+void CubeRenderer::render(glm::vec3 pos)
 {
     shader->use();
     texture->use();
 
     // Model
     glm::mat4 model = glm::mat4(1.0f);
-    model = glm::rotate(model, (float)glfwGetTime() * glm::radians(50.0f), glm::vec3(0.5f, 1.0f, 0.0f));
+    //model = glm::rotate(model, (float)glfwGetTime() * glm::radians(50.0f), glm::vec3(0.5f, 1.0f, 0.0f));
+    model = glm::translate(model, pos);
 
     // View
     glm::mat4 view = glm::mat4(1.0f);

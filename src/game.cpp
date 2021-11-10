@@ -36,7 +36,7 @@ void Game::render()
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
     // Draw stuff
-    cube->render();
+    cube->render(glm::vec3(0, 0, -5));
 }
 
 void Game::pollButtons()
