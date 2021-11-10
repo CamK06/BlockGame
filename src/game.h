@@ -3,7 +3,7 @@
 #include <GL/glew.h>
 #include <GLFW/glfw3.h>
 
-#include "graphics/renderers/quadrenderer.h"
+#include "graphics/renderers/cuberenderer.h"
 
 class Game
 {
@@ -16,5 +16,5 @@ private:
     void pollButtons();
 
     GLFWwindow* window;
-    Graphics::QuadRenderer* quad;
+    Graphics::CubeRenderer* cube;
 };

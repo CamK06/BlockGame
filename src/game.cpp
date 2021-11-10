@@ -7,7 +7,7 @@ int Game::exec()
     // Display setup
     Log::write("Initializing BlockGame...");
     Graphics::Display::createWindow(&window);
-    quad = new Graphics::QuadRenderer();
+    cube = new Graphics::CubeRenderer();
 
     // Game loop
     while(!glfwWindowShouldClose(window)) {
@@ -33,10 +33,10 @@ void Game::render()
 {
     // Clear screen
     glClearColor(0.0f, 0.65f, 0.75f, 1.0f);
-    glClear(GL_COLOR_BUFFER_BIT);
+    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
     // Draw stuff
-    quad->render();
+    cube->render();
 }
 
 void Game::pollButtons()
