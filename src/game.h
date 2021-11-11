@@ -3,12 +3,16 @@
 #include <GL/glew.h>
 #include <GLFW/glfw3.h>
 
-#include "graphics/renderers/cuberenderer.h"
+#include "graphics/renderers/blockrenderer.h"
 #include "graphics/camera.h"
+
+#include "world/block.h"
+#include "world/level.h"
 
 class Game
 {
 public:
+    Game() = default;
     int exec();
 
 private:
@@ -22,4 +26,6 @@ private:
     GLFWwindow* window;
     Graphics::CubeRenderer* cube;
     Graphics::Camera* camera;
+    World::Level* level;
+
 };
