@@ -18,8 +18,8 @@ int Game::exec()
 
     for(int i = 0; i < 256; i++) {
         for(int j = 0; j < 256; j++) {
-            for(int k = 0; k < 32+(perlin.accumulatedOctaveNoise2D(i/100.0f, j/100.0f, 4)*10); k++) {
-                level->setBlock(i, k, j, BLOCK_STONE);
+            for(int k = 0; k < 32+(perlin.noise2D(i/100.0f, j/100.0f)*10); k++) {
+                level->setBlock(i, k, j, BLOCK_GRASS);
             }
         }
     }
