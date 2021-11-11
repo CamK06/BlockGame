@@ -12,12 +12,14 @@ int Game::exec()
     // Display setup
     Log::write("Initializing BlockGame...");
     Graphics::Display::createWindow(&window);
-    level = new World::Level(32, 32, 256);
+    level = new World::Level(256, 256, 256);
     camera = new Graphics::Camera(glm::vec3(0.0f, 0.0f, 3.0f));
-    for(int i = 0; i < 32; i++) {
-        for(int j = 0; j < 32; j++) {
-            for(int k = 0; k < 32/*+(perlin::noise(i/100.0f, j/100.0f)*10)*/; k++) {
-                level->setBlock(i, k, j, BLOCK_GRASS);
+    siv::PerlinNoise perlin(time(0));
+
+    for(int i = 0; i < 256; i++) {
+        for(int j = 0; j < 256; j++) {
+            for(int k = 0; k < 32+(perlin.accumulatedOctaveNoise2D(i/100.0f, j/100.0f, 4)*10); k++) {
+                level->setBlock(i, k, j, BLOCK_STONE);
             }
         }
     }
