@@ -5,8 +5,16 @@
 namespace Graphics
 {
 
+std::map<std::string, unsigned int> Texture::textures;
+
 Texture::Texture(const char* fileName)
 {
+    // Load the texture if it already exists
+    if(textures.count(fileName)) {
+        ID = textures[fileName];
+        return;
+    }
+
     // Load the texture
     unsigned char* data = stbi_load(fileName, &width, &height, &channels, 0);
     if(!data) { 
@@ -24,6 +32,9 @@ Texture::Texture(const char* fileName)
     glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width, height, 0, GL_RGB, GL_UNSIGNED_BYTE, data);
     glGenerateMipmap(GL_TEXTURE_2D);
     glBindTexture(GL_TEXTURE_2D, 0);
+
+    // Save the texture ID for later
+    textures.insert({fileName, ID});
 
     // Cleanup
     stbi_image_free(data);
