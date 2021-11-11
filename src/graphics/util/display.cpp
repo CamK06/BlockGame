@@ -6,6 +6,8 @@
 namespace Graphics::Display
 {
 
+bool wireframe = false;
+
 void createWindow(GLFWwindow** window)
 {
     // Initialize GLFW
@@ -16,6 +18,7 @@ void createWindow(GLFWwindow** window)
     *window = glfwCreateWindow(WIDTH, HEIGHT, "BlockGame", NULL, NULL);
     glfwMakeContextCurrent(*window);
     glfwSetWindowSizeCallback(*window, windowSizeUpdated);
+    glfwSetKeyCallback(*window, keyCallback);
     glfwSetInputMode(*window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
 
     // Initialize GLEW
@@ -24,7 +27,22 @@ void createWindow(GLFWwindow** window)
     // Direct OpenGL stuff
     glViewport(0, 0, WIDTH, HEIGHT);
     glEnable(GL_DEPTH_TEST);
-    //glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
+}
+
+void keyCallback(GLFWwindow* window, int key, int scancode, int action, int mods)
+{
+    if(key == GLFW_KEY_F3 && action == GLFW_RELEASE)
+        toggleWireframe();
+}
+
+void toggleWireframe()
+{
+    wireframe = !wireframe;
+
+    if(wireframe)
+        glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
+    else
+        glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
 }
 
 void terminate()

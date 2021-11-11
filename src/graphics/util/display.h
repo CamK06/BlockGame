@@ -10,4 +10,6 @@ namespace Graphics::Display
     void createWindow(GLFWwindow** window);
     void windowSizeUpdated(GLFWwindow* window, int x, int y);
     void terminate();
+    void keyCallback(GLFWwindow* window, int key, int scancode, int action, int mods);
+    void toggleWireframe();
 }
