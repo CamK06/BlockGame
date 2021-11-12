@@ -21,13 +21,15 @@ int Game::exec()
     siv::PerlinNoise perlin(time(0));
     siv::PerlinNoise perlin2(rand());
     srand(time(0));
-    for(int i = 0; i < 128; i++) {
-        for(int j = 0; j < 128; j++) {
-            int genHeight = (32 + perlin.noise2D(i/100.0f, j/100.0f + perlin.noise2D(i/100.0f, j/100.0f) + perlin.accumulatedOctaveNoise2D(i/100.0f, j/100.0f, 4)) * 16);
+    for(int i = 0; i < 16; i++) {
+        for(int j = 0; j < 16; j++) {
+            int genHeight = (64 + (perlin.noise2D(i/100.0f, j/100.0f)) + perlin2.normalizedOctaveNoise2D(i/100.0f, j/100.0f, 4) * 16);
             for(int k = 0; k < genHeight; k++) {
 
-                if(k >= genHeight-3) // Generate grass if we're in the top 3 blocks
+                if(k == genHeight-1) // Generate grass on the top layer
                     level->setBlock(i, k, j, BLOCK_GRASS);
+                else if(k >= genHeight-4) // Generate dirt if we're in the top 3 blocks under the grass
+                    level->setBlock(i, k, j, BLOCK_DIRT);
                 else // Otherwise generate stone
                     level->setBlock(i, k, j, BLOCK_STONE);
             }
