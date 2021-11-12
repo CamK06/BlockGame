@@ -8,5 +8,8 @@ uniform sampler2D textureSampler;
 
 void main()
 {
-    color = texture(textureSampler, UV) * brightness;
+    vec4 outColour = texture(textureSampler, UV) * brightness;
+    if(outColour.a < 0.1)
+        discard;
+    color = outColour;
 }
