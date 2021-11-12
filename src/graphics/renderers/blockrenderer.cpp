@@ -30,12 +30,16 @@ CubeRenderer::CubeRenderer()
     glBufferData(GL_ARRAY_BUFFER, mesh.getNumVertices() * sizeof(float), mesh.getVertices(), GL_STATIC_DRAW);
 
     // Set position attribute
-    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 5 * sizeof(float), (void*)0);
+    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(float), (void*)0);
     glEnableVertexAttribArray(0);
 
     // Set UV attribute
-    glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 5 * sizeof(float), (void*)(3 * sizeof(float)));
+    glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 6 * sizeof(float), (void*)(3 * sizeof(float)));
     glEnableVertexAttribArray(1);
+
+    // Set brightness attribute
+    glVertexAttribPointer(2, 1, GL_FLOAT, GL_FALSE, 6 * sizeof(float), (void*)(5 * sizeof(float)));
+    glEnableVertexAttribArray(2);
 
     // Unbind
     glBindBuffer(GL_ARRAY_BUFFER, 0);
@@ -72,6 +76,7 @@ void CubeRenderer::updateMesh(World::Level* level, int x, int y, int z, int bloc
 
     // Create faces
     if(!level->isSolidBlock(x, y - 1, z)) { // Bottom
+        mesh.setBrightness(0.6f);
         mesh.addTexture(u, v1);
         mesh.addVertex(x, y, z1);
         mesh.addTexture(u, v);
@@ -82,6 +87,7 @@ void CubeRenderer::updateMesh(World::Level* level, int x, int y, int z, int bloc
         mesh.addVertex(x1, y, z1);
     }
     if(!level->isSolidBlock(x, y + 1, z)) { // Top
+        mesh.setBrightness(1.0f);
         mesh.addTexture(u1, v1);
         mesh.addVertex(x1, y1, z1);
         mesh.addTexture(u1, v);
@@ -92,6 +98,7 @@ void CubeRenderer::updateMesh(World::Level* level, int x, int y, int z, int bloc
         mesh.addVertex(x, y1, z1);
     }
     if(!level->isSolidBlock(x, y, z - 1)) { // Left
+        mesh.setBrightness(0.8f);
         mesh.addTexture(u1, v);
         mesh.addVertex(x, y1, z);
         mesh.addTexture(u, v);
@@ -102,6 +109,7 @@ void CubeRenderer::updateMesh(World::Level* level, int x, int y, int z, int bloc
         mesh.addVertex(x, y, z);
     }
     if(!level->isSolidBlock(x, y, z + 1)) { // Right
+        mesh.setBrightness(0.8f);
         mesh.addTexture(u, v);
         mesh.addVertex(x, y1, z1);
         mesh.addTexture(u, v1);
@@ -112,6 +120,7 @@ void CubeRenderer::updateMesh(World::Level* level, int x, int y, int z, int bloc
         mesh.addVertex(x1, y1, z1);
     }
     if(!level->isSolidBlock(x - 1, y, z)) { // Front
+        mesh.setBrightness(0.86f);
         mesh.addTexture(u1, v);
         mesh.addVertex(x, y1, z1);
         mesh.addTexture(u, v);
@@ -122,6 +131,7 @@ void CubeRenderer::updateMesh(World::Level* level, int x, int y, int z, int bloc
         mesh.addVertex(x, y, z1);
     }
     if(!level->isSolidBlock(x + 1, y, z)) { // Back
+        mesh.setBrightness(0.86f);
         mesh.addTexture(u, v1);
         mesh.addVertex(x1, y, z1);
         mesh.addTexture(u1, v1);

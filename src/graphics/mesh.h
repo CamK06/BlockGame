@@ -12,6 +12,7 @@ class Mesh
 public:
     void addVertex(float x, float y, float z);
     void addTexture(float u, float v);
+    void setBrightness(float brightness);
     void clear();
 
     float* getVertices();
@@ -19,6 +20,7 @@ public:
 
 private:
     float u, v;
+    float brightness = 1.0;
     bool hasTexture;
 
     std::vector<float> vertices;

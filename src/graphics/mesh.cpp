@@ -12,6 +12,12 @@ void Mesh::addVertex(float x, float y, float z)
         vertices.push_back(u);
         vertices.push_back(v);
     }
+    vertices.push_back(brightness);
+}
+
+void Mesh::setBrightness(float brightness)
+{
+    this->brightness = brightness;
 }
 
 void Mesh::addTexture(float u, float v)
@@ -30,6 +36,7 @@ void Mesh::clear()
 {
     vertices.clear();
     hasTexture = false;
+    brightness = 1.0f;
 }
 
 float* Mesh::getVertices()

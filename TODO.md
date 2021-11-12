@@ -3,7 +3,7 @@
 * Implement AABB
 * Implement block breaking
 * Implement chunking
-* Implement lighting
+* ~~Implement lighting~~ *lighting is really just pseudo-lighting
 * ~~Increase render distance~~
 * Fix purple distance texture bug
 * Implement texturing for individual block faces
