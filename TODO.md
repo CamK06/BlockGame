@@ -7,3 +7,4 @@
 * ~~Increase render distance~~ **DONE**
 * ~~Fix purple distance texture bug~~ **DONE**
 * Implement texturing for individual block faces
+* Implement distance fog
