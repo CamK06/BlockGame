@@ -11,7 +11,7 @@ int Game::exec()
 {
     // Display setup
     Log::write("Initializing BlockGame...");
-    Graphics::Display::createWindow(&window);
+    Graphics::Display::createWindow(&window, this);
     camera = new Graphics::Camera(glm::vec3(0.0f, 0.0f, 3.0f));
 
     // Game setup
@@ -79,4 +79,10 @@ void Game::pollButtons()
         glfwSetWindowShouldClose(window, true);
     
     camera->input(window, deltaTime);
+}
+
+// I really need a better way to do this... calling so many functions is dumb.
+// TODO: Maybe just make a pointer directly to the needed function
+void Game::updateAspect() {
+    level->updateAspect();
 }

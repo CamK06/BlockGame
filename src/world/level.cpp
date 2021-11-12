@@ -58,4 +58,8 @@ void Level::render(glm::vec3 pos, Graphics::Camera* camera)
     renderer->render(pos, camera);
 }
 
+void Level::updateAspect() {
+    renderer->updateAspect();
+}
+
 }

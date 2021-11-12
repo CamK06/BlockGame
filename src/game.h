@@ -14,6 +14,7 @@ class Game
 public:
     Game() = default;
     int exec();
+    void updateAspect();
 
 private:
     void update();

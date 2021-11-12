@@ -40,6 +40,18 @@ CubeRenderer::CubeRenderer()
     // Unbind
     glBindBuffer(GL_ARRAY_BUFFER, 0);
     glBindVertexArray(0);
+
+    // Set aspect ratio in projection
+    window = glfwGetCurrentContext();
+    updateAspect();
+}
+
+void CubeRenderer::updateAspect()
+{
+    if(window) { 
+        glfwGetWindowSize(window, &windowWidth, &windowHeight);
+        projection = glm::perspective(glm::radians(70.0f), (float)windowWidth / windowHeight, 0.1f, 500.0f);
+    }
 }
 
 void CubeRenderer::updateMesh(World::Level* level, int x, int y, int z, int blockType)
@@ -132,16 +144,7 @@ void CubeRenderer::render(glm::vec3 pos, Camera* camera)
 
     // Model
     glm::mat4 model = glm::mat4(1.0f);
-    //model = glm::rotate(model, (float)glfwGetTime() * glm::radians(50.0f), glm::vec3(0.5f, 1.0f, 0.0f));
     model = glm::translate(model, pos);
-
-    // View
-    glm::mat4 view = glm::mat4(1.0f);
-    view = glm::translate(view, glm::vec3(0.0f, 0.0f, -3.0f));
-
-    // Projection
-    glm::mat4 projection;
-    projection = glm::perspective(glm::radians(70.0f), 1280.0f / 720.0f, 0.1f, 500.0f);
 
     unsigned int modelLoc = glGetUniformLocation(shader->ID, "model");
     glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));

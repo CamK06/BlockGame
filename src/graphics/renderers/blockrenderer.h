@@ -20,12 +20,17 @@ public:
     CubeRenderer();
     void updateMesh(World::Level* level, int x, int y, int z, int blockType);
     void render(glm::vec3 pos, Camera* camera);
+    void updateAspect();
 
     Mesh mesh;
 
 private:
+    glm::mat4 projection;
     Shader* shader;
     Texture* textureAtlas;
+    
+    GLFWwindow* window;
+    int windowWidth, windowHeight;
 
     unsigned int VAO;
     unsigned int VBO;

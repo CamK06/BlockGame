@@ -15,6 +15,7 @@ public:
     void setBlock(int x, int y, int z, int blockType);
     void render(glm::vec3 pos, Graphics::Camera* camera);
     void updateMesh();
+    void updateAspect();
 
 private:
     int width, height, depth;

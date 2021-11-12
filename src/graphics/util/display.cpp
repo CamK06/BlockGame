@@ -2,13 +2,15 @@
 #include <GLFW/glfw3.h>
 
 #include "display.h"
+#include "../../game.h"
 
 namespace Graphics::Display
 {
 
 bool wireframe = false;
+Game* game1;
 
-void createWindow(GLFWwindow** window)
+void createWindow(GLFWwindow** window, Game* game)
 {
     // Initialize GLFW
     if(!glfwInit()) // TODO: Add fail message
@@ -27,6 +29,8 @@ void createWindow(GLFWwindow** window)
     // Direct OpenGL stuff
     glViewport(0, 0, WIDTH, HEIGHT);
     glEnable(GL_DEPTH_TEST);
+
+    game1 = game;
 }
 
 void keyCallback(GLFWwindow* window, int key, int scancode, int action, int mods)
@@ -53,6 +57,7 @@ void terminate()
 void windowSizeUpdated(GLFWwindow* window, int x, int y)
 {
     glViewport(0, 0, x, y);
+    game1->updateAspect();
 }
 
 }
