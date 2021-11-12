@@ -16,7 +16,7 @@ Texture::Texture(const char* fileName)
     }
 
     // Load the texture
-    unsigned char* data = stbi_load(fileName, &width, &height, &channels, 0);
+    unsigned char* data = stbi_load(fileName, &width, &height, &channels, STBI_rgb_alpha);
     if(!data) { 
         Log::write("Failed to load texture!");
         return;
@@ -29,7 +29,7 @@ Texture::Texture(const char* fileName)
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST_MIPMAP_NEAREST);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
-    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width, height, 0, GL_RGB, GL_UNSIGNED_BYTE, data);
+    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, data);
     glGenerateMipmap(GL_TEXTURE_2D);
     glBindTexture(GL_TEXTURE_2D, 0);
 

@@ -19,6 +19,7 @@ int Game::exec()
 
     // World generation
     siv::PerlinNoise perlin(time(0));
+    srand(time(0));
     for(int i = 0; i < 512; i++) {
         for(int j = 0; j < 512; j++) {
             int genHeight = 32+(perlin.noise2D(i/100.0f, j/100.0f)*10);
