@@ -4,5 +4,6 @@
 * Implement block breaking
 * Implement chunking
 * Implement lighting
-* Increase render distance
+* ~~Increase render distance~~
 * Fix purple distance texture bug
+* Implement texturing for individual block faces

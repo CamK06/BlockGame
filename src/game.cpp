@@ -12,14 +12,22 @@ int Game::exec()
     // Display setup
     Log::write("Initializing BlockGame...");
     Graphics::Display::createWindow(&window);
-    level = new World::Level(256, 256, 256);
     camera = new Graphics::Camera(glm::vec3(0.0f, 0.0f, 3.0f));
-    siv::PerlinNoise perlin(time(0));
 
-    for(int i = 0; i < 256; i++) {
-        for(int j = 0; j < 256; j++) {
-            for(int k = 0; k < 32+(perlin.noise2D(i/100.0f, j/100.0f)*10); k++) {
-                level->setBlock(i, k, j, BLOCK_GRASS);
+    // Game setup
+    level = new World::Level(128, 128, 256);
+
+    // World generation
+    siv::PerlinNoise perlin(time(0));
+    for(int i = 0; i < 512; i++) {
+        for(int j = 0; j < 512; j++) {
+            int genHeight = 32+(perlin.noise2D(i/100.0f, j/100.0f)*10);
+            for(int k = 0; k < genHeight; k++) {
+
+                if(k >= genHeight-3) // Generate grass if we're in the top 3 blocks
+                    level->setBlock(i, k, j, BLOCK_GRASS);
+                else // Otherwise generate stone
+                    level->setBlock(i, k, j, BLOCK_STONE);
             }
         }
     }

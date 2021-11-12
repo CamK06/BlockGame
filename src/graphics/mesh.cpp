@@ -3,10 +3,6 @@
 namespace Graphics 
 {
 
-Mesh::Mesh()
-    : texture("textures/terrain.png")
-{}
-
 void Mesh::addVertex(float x, float y, float z)
 {
     vertices.push_back(x);
