@@ -11,4 +11,4 @@ find_package(glfw3 REQUIRED)
 find_package(glm REQUIRED)
 
 add_executable(blockgame ${SOURCES})
-target_link_libraries(blockgame glfw GLEW::GLEW OpenGL::GL glm)
+target_link_libraries(blockgame glfw GLEW::GLEW OpenGL::GL)
