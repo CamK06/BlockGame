@@ -5,6 +5,7 @@ layout (location = 2) in float aBrightness;
 
 out vec2 UV;
 out float brightness;
+out vec3 camPos;
 
 uniform mat4 model;
 uniform mat4 view;
@@ -15,4 +16,5 @@ void main()
     gl_Position = projection * view * model * vec4(aPos, 1.0f);
     UV = aUV;
     brightness = aBrightness;
+    camPos = ((view * model) * vec4(aPos, 1.0)).xyz;
 } 

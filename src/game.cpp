@@ -21,8 +21,8 @@ int Game::exec()
     siv::PerlinNoise perlin(time(0));
     siv::PerlinNoise perlin2(rand());
     srand(time(0));
-    for(int i = 0; i < 16; i++) {
-        for(int j = 0; j < 16; j++) {
+    for(int i = 0; i < 128; i++) {
+        for(int j = 0; j < 128; j++) {
             int genHeight = (64 + (perlin.noise2D(i/100.0f, j/100.0f)) + perlin2.normalizedOctaveNoise2D(i/100.0f, j/100.0f, 4) * 16);
             for(int k = 0; k < genHeight; k++) {
 
