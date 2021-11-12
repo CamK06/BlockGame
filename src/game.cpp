@@ -15,14 +15,15 @@ int Game::exec()
     camera = new Graphics::Camera(glm::vec3(0.0f, 0.0f, 3.0f));
 
     // Game setup
-    level = new World::Level(128, 128, 256);
+    level = new World::Level(512, 512, 256);
 
     // World generation
     siv::PerlinNoise perlin(time(0));
+    siv::PerlinNoise perlin2(rand());
     srand(time(0));
     for(int i = 0; i < 512; i++) {
         for(int j = 0; j < 512; j++) {
-            int genHeight = 32+(perlin.noise2D(i/100.0f, j/100.0f)*10);
+            int genHeight = (32 + perlin.noise2D(i/100.0f, j/100.0f + perlin.noise2D(i/100.0f, j/100.0f) + perlin.accumulatedOctaveNoise2D(i/100.0f, j/100.0f, 4)) * 16);
             for(int k = 0; k < genHeight; k++) {
 
                 if(k >= genHeight-3) // Generate grass if we're in the top 3 blocks
