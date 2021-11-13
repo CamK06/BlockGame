@@ -15,6 +15,7 @@ public:
     Game() = default;
     int exec();
     void updateAspect();
+    void keyPressed(int key);
 
 private:
     void update();

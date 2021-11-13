@@ -98,6 +98,11 @@ void Game::render()
     Ui::DisplayText(fpsText, 10, windowHeight-40, 1.0f, glm::vec3(1.0f, 1.0f, 1.0f), false);
 }
 
+void Game::keyPressed(int key)
+{
+    
+}
+
 void Game::pollButtons()
 {
     // Escape to exit
