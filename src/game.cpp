@@ -12,7 +12,7 @@ int Game::exec()
     // Display setup
     Log::write("Initializing BlockGame...");
     Graphics::Display::createWindow(&window, this);
-    camera = new Graphics::Camera(glm::vec3(0.0f, 0.0f, 3.0f));
+    camera = new Graphics::Camera(glm::vec3(0.0f, 32.0f, 0.0f));
 
     // Game setup
     level = new World::Level(128, 128, 256);
