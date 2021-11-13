@@ -92,6 +92,8 @@ void UpdateDisplay()
     int width, height;
     glfwGetWindowSize(glfwGetCurrentContext(), &width, &height);
     projection = glm::ortho(0.0f, static_cast<float>(width), 0.0f, static_cast<float>(height));
+    shader->use();
+    glUniformMatrix4fv(glGetUniformLocation(shader->ID, "projection"), 1, GL_FALSE, glm::value_ptr(projection));
 }
 
 void DisplayText(std::string text, float x, float y, float scale, glm::vec3 colour, bool centered)
