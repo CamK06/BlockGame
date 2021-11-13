@@ -14,11 +14,13 @@ int Game::exec()
     Log::write("Initializing BlockGame...");
     Graphics::Display::createWindow(&window, this);
     Ui::InitText();
+    windowWidth = WIDTH;
+    windowHeight = HEIGHT;
 
     // First render, for a loading screen
     glClearColor(0.0f, 0.5f, 0.8f, 1.0f);
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-    Ui::DisplayText("Generating world...", 1280/2, 720/2, 1.0f, glm::vec3(1.0f, 1.0f, 1.0f));
+    Ui::DisplayText("Generating world...", windowWidth/2, windowHeight/2, 1.0f, glm::vec3(1.0f, 1.0f, 1.0f));
     glfwSwapBuffers(window);
 
     // Game setup
@@ -94,13 +96,33 @@ void Game::render()
 
     // FPS Display
     char fpsText[16];
+    char coordsText[32];
     sprintf(fpsText, "FPS: %d", fps);
     Ui::DisplayText(fpsText, 10, windowHeight-40, 1.0f, glm::vec3(1.0f, 1.0f, 1.0f), false);
+
+    sprintf(coordsText, "X: %.1f", camera->pos.x);
+    Ui::DisplayText(coordsText, 10, windowHeight-80, 1.0f, glm::vec3(1.0f, 1.0f, 1.0f), false);
+    sprintf(coordsText, "Y: %.1f", camera->pos.y);
+    Ui::DisplayText(coordsText, 10, windowHeight-120, 1.0f, glm::vec3(1.0f, 1.0f, 1.0f), false);
+    sprintf(coordsText, "Z: %.1f", camera->pos.z);
+    Ui::DisplayText(coordsText, 10, windowHeight-160, 1.0f, glm::vec3(1.0f, 1.0f, 1.0f), false);
 }
 
 void Game::keyPressed(int key)
 {
-    
+    // F11 fullscreen toggle
+    if(glfwGetKey(window, GLFW_KEY_F11) == GLFW_PRESS) {
+        
+        if(!fullscreen) {
+            const GLFWvidmode* mode = glfwGetVideoMode(glfwGetPrimaryMonitor());
+            glfwSetWindowMonitor(window, glfwGetPrimaryMonitor(), 0, 0, mode->width, mode->height, mode->refreshRate);
+            fullscreen = true;
+        }
+        else {
+            glfwSetWindowMonitor(window, nullptr, 0, 0, WIDTH, HEIGHT, 60);
+            fullscreen = false;
+        }
+    }
 }
 
 void Game::pollButtons()

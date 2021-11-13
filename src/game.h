@@ -28,6 +28,8 @@ private:
     int fps = 0;
     int frameCount = 0;
 
+    bool fullscreen = false;
+
     GLFWwindow* window;
     int windowWidth = 1280;
     int windowHeight = 720;
