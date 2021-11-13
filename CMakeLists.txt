@@ -11,4 +11,6 @@ find_package(glfw3 REQUIRED)
 find_package(glm REQUIRED)
 
 add_executable(blockgame ${SOURCES})
-target_link_libraries(blockgame glfw GLEW::GLEW OpenGL::GL)
+target_link_libraries(blockgame glfw GLEW::GLEW OpenGL::GL freetype)
+# TODO: Make this cross-platform
+target_include_directories(blockgame PUBLIC "/usr/include/freetype2")

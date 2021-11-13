@@ -22,9 +22,15 @@ private:
     void pollButtons();
 
     float deltaTime = 0.0f;
-    float lastFrame = 0.0f;
+    float lastTime = 0.0f;
+    float fpsLastTime = 0.0f;
+    int fps = 0;
+    int frameCount = 0;
 
     GLFWwindow* window;
+    int windowWidth = 1280;
+    int windowHeight = 720;
+
     Graphics::CubeRenderer* cube;
     Graphics::Camera* camera;
     World::Level* level;
