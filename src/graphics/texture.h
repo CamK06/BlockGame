@@ -12,7 +12,7 @@ namespace Graphics
 class Texture
 {
 public:
-    Texture(const char* fileName);
+    Texture(std::string fileName);
     void use();
 
     unsigned int ID;

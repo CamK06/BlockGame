@@ -7,7 +7,7 @@ namespace Graphics
 
 std::map<std::string, unsigned int> Texture::textures;
 
-Texture::Texture(const char* fileName)
+Texture::Texture(std::string fileName)
 {
     // Load the texture if it already exists
     if(textures.count(fileName)) {
@@ -16,7 +16,7 @@ Texture::Texture(const char* fileName)
     }
 
     // Load the texture
-    unsigned char* data = stbi_load(fileName, &width, &height, &channels, STBI_rgb_alpha);
+    unsigned char* data = stbi_load(("res/textures/" + fileName).c_str(), &width, &height, &channels, STBI_rgb_alpha);
     if(!data) { 
         Log::write("Failed to load texture!");
         return;

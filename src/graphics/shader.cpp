@@ -10,7 +10,7 @@
 namespace Graphics
 {
 
-Shader::Shader(const char* vertexPath, const char* fragmentPath)
+Shader::Shader(std::string vertexPath, std::string fragmentPath)
 {
     // Initial variables for loading
     std::string vertexCode;
@@ -25,8 +25,8 @@ Shader::Shader(const char* vertexPath, const char* fragmentPath)
     fragShaderFile.exceptions(std::ifstream::failbit | std::ifstream::badbit);
 
     // Load the shader code
-    vertShaderFile.open(vertexPath);
-    fragShaderFile.open(fragmentPath);
+    vertShaderFile.open("res/shaders/" + vertexPath);
+    fragShaderFile.open("res/shaders/" + fragmentPath);
     vertShaderStream << vertShaderFile.rdbuf();
     fragShaderStream << fragShaderFile.rdbuf();
     vertShaderFile.close();

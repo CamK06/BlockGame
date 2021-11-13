@@ -22,7 +22,7 @@ unsigned int VBO;
 void InitText()
 {
     // Shader setup
-    shader = new Graphics::Shader("shaders/text.vs", "shaders/text.fs");
+    shader = new Graphics::Shader("text.vs", "text.fs");
     shader->use();
     glUniformMatrix4fv(glGetUniformLocation(shader->ID, "projection"), 1, GL_FALSE, glm::value_ptr(projection));
 
@@ -33,7 +33,7 @@ void InitText()
     }
 
     // Load the font
-    if(FT_New_Face(ft, "fonts/default.ttf", 0, &face)) {
+    if(FT_New_Face(ft, "res/fonts/default.ttf", 0, &face)) {
         Log::write("Failed to load font!");
         return;
     }

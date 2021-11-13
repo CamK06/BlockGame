@@ -10,4 +10,5 @@
 * ~~Implement distance fog~~ **DONE**
 * Implement proper mipmapping
 * Implement new camera class
-* Implement text rendering
+* ~~Implement text rendering~~ **DONE**
+* ~~Clean up resource file structure~~ **DONE**

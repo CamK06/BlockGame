@@ -15,8 +15,8 @@ namespace Graphics
 
 CubeRenderer::CubeRenderer()
 {
-    shader = new Shader("shaders/block.vs", "shaders/block.fs");
-    textureAtlas = new Texture("textures/terrain.png");
+    shader = new Shader("block.vs", "block.fs");
+    textureAtlas = new Texture("terrain.png");
 
     // Generate VAO, VBO
     glGenVertexArrays(1, &VAO);
