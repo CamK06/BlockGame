@@ -37,11 +37,10 @@ void createWindow(GLFWwindow** window, Game* game)
 
 void keyCallback(GLFWwindow* window, int key, int scancode, int action, int mods)
 {
-    if(key == GLFW_KEY_F3 && action == GLFW_RELEASE)
-        toggleWireframe();
-
     if(action == GLFW_PRESS)
         game1->keyPressed(key);
+    else if(action == GLFW_RELEASE)
+        game1->keyReleased(key);
 }
 
 void toggleWireframe()

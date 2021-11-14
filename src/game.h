@@ -16,6 +16,7 @@ public:
     int exec();
     void updateAspect();
     void keyPressed(int key);
+    void keyReleased(int key);
 
 private:
     void update();

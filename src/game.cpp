@@ -128,6 +128,13 @@ void Game::keyPressed(int key)
         glfwSetWindowShouldClose(window, true);
 }
 
+void Game::keyReleased(int key)
+{
+    // F2 wireframe toggle
+    if(key == GLFW_KEY_F2)
+        Graphics::Display::toggleWireframe();
+}
+
 void Game::pollButtons()
 {   
     camera->input(window, deltaTime);
