@@ -112,8 +112,7 @@ void Game::render()
 void Game::keyPressed(int key)
 {
     // F11 fullscreen toggle
-    if(glfwGetKey(window, GLFW_KEY_F11) == GLFW_PRESS) {
-        
+    if(key == GLFW_KEY_F11) {
         if(!fullscreen) {
             const GLFWvidmode* mode = glfwGetVideoMode(glfwGetPrimaryMonitor());
             glfwSetWindowMonitor(window, glfwGetPrimaryMonitor(), 0, 0, mode->width, mode->height, mode->refreshRate);
@@ -124,14 +123,13 @@ void Game::keyPressed(int key)
             fullscreen = false;
         }
     }
+    // Escape to exit
+    if(key == GLFW_KEY_ESCAPE)
+        glfwSetWindowShouldClose(window, true);
 }
 
 void Game::pollButtons()
-{
-    // Escape to exit
-    if(glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS)
-        glfwSetWindowShouldClose(window, true);
-    
+{   
     camera->input(window, deltaTime);
 }
 

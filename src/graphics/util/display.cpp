@@ -40,7 +40,8 @@ void keyCallback(GLFWwindow* window, int key, int scancode, int action, int mods
     if(key == GLFW_KEY_F3 && action == GLFW_RELEASE)
         toggleWireframe();
 
-    game1->keyPressed(key);
+    if(action == GLFW_PRESS)
+        game1->keyPressed(key);
 }
 
 void toggleWireframe()
