@@ -26,6 +26,7 @@ int Game::exec()
     // Game setup
     camera = new Graphics::Camera(glm::vec3(0.0f, 32.0f, 0.0f));
     level = new World::Level(128, 128, 256);
+    World::Block::initBlocks();
 
     // World generation
     siv::PerlinNoise perlin(time(0));

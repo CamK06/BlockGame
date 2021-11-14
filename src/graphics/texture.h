@@ -9,6 +9,12 @@
 namespace Graphics
 {
 
+struct UV
+{
+    int textureID;
+    float u, v;
+};
+
 class Texture
 {
 public:

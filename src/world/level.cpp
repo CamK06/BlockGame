@@ -46,7 +46,7 @@ bool Level::isBlock(int x, int y, int z)
         return false;
 
     // TODO: Change this to a block transparency check
-    return blocks[(y * height + z) * width + x] != BLOCK_AIR && blocks[(y * height + z) * width + x] != BLOCK_LEAVES;
+    return blocks[(y * height + z) * width + x] != BLOCK_AIR;
 }
 
 bool Level::isSolidBlock(int x, int y, int z)

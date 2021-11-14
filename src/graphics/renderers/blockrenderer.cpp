@@ -63,11 +63,12 @@ void CubeRenderer::updateMesh(World::Level* level, int x, int y, int z, int bloc
     if(blockType == BLOCK_AIR)
         return;
 
+    World::Block block = World::Block::getBlock(blockType);
+
     // Calculate UV coordinates
-    float u = blockType / 16.0f;
-    float u1 = u + 0.0624375f;
+    float u;
     float v = 0.0f; // TODO: Update this value once more textures are added, to allow for another row
-    float v1 = v + 0.0624375f;
+    UV uv;
 
     // Calculate XYZ coordinates
     float x1 = x + 1.0f;
@@ -76,67 +77,79 @@ void CubeRenderer::updateMesh(World::Level* level, int x, int y, int z, int bloc
 
     // Create faces
     if(!level->isSolidBlock(x, y - 1, z)) { // Bottom
+        uv = block.getUV(World::BlockFace::Down);
+        u = uv.textureID / 16.0f;
         mesh.setBrightness(0.6f);
-        mesh.addTexture(u, v1);
+        mesh.addTexture(u, uv.v);
         mesh.addVertex(x, y, z1);
         mesh.addTexture(u, v);
         mesh.addVertex(x, y, z);
-        mesh.addTexture(u1, v);
+        mesh.addTexture(uv.u, v);
         mesh.addVertex(x1, y, z);
-        mesh.addTexture(u1, v1);
+        mesh.addTexture(uv.u, uv.v);
         mesh.addVertex(x1, y, z1);
     }
     if(!level->isSolidBlock(x, y + 1, z)) { // Top
+        uv = block.getUV(World::BlockFace::Up);
+        u = uv.textureID / 16.0f;
         mesh.setBrightness(1.0f);
-        mesh.addTexture(u1, v1);
+        mesh.addTexture(uv.u, uv.v);
         mesh.addVertex(x1, y1, z1);
-        mesh.addTexture(u1, v);
+        mesh.addTexture(uv.u, v);
         mesh.addVertex(x1, y1, z);
         mesh.addTexture(u, v);
         mesh.addVertex(x, y1, z);
-        mesh.addTexture(u, v1);
+        mesh.addTexture(u, uv.v);
         mesh.addVertex(x, y1, z1);
     }
     if(!level->isSolidBlock(x, y, z - 1)) { // Left
+        uv = block.getUV(World::BlockFace::Left);
+        u = uv.textureID / 16.0f;
         mesh.setBrightness(0.8f);
-        mesh.addTexture(u1, v);
+        mesh.addTexture(uv.u, v);
         mesh.addVertex(x, y1, z);
         mesh.addTexture(u, v);
         mesh.addVertex(x1, y1, z);
-        mesh.addTexture(u, v1);
+        mesh.addTexture(u, uv.v);
         mesh.addVertex(x1, y, z);
-        mesh.addTexture(u1, v1);
+        mesh.addTexture(uv.u, uv.v);
         mesh.addVertex(x, y, z);
     }
     if(!level->isSolidBlock(x, y, z + 1)) { // Right
+        uv = block.getUV(World::BlockFace::Right);
+        u = uv.textureID / 16.0f;
         mesh.setBrightness(0.8f);
         mesh.addTexture(u, v);
         mesh.addVertex(x, y1, z1);
-        mesh.addTexture(u, v1);
+        mesh.addTexture(u, uv.v);
         mesh.addVertex(x, y, z1);
-        mesh.addTexture(u1, v1);
+        mesh.addTexture(uv.u, uv.v);
         mesh.addVertex(x1, y, z1);
-        mesh.addTexture(u1, v);
+        mesh.addTexture(uv.u, v);
         mesh.addVertex(x1, y1, z1);
     }
     if(!level->isSolidBlock(x - 1, y, z)) { // Front
+        uv = block.getUV(World::BlockFace::Front);
+        u = uv.textureID / 16.0f;
         mesh.setBrightness(0.86f);
-        mesh.addTexture(u1, v);
+        mesh.addTexture(uv.u, v);
         mesh.addVertex(x, y1, z1);
         mesh.addTexture(u, v);
         mesh.addVertex(x, y1, z);
-        mesh.addTexture(u, v1);
+        mesh.addTexture(u, uv.v);
         mesh.addVertex(x, y, z);
-        mesh.addTexture(u1, v1);
+        mesh.addTexture(uv.u, uv.v);
         mesh.addVertex(x, y, z1);
     }
     if(!level->isSolidBlock(x + 1, y, z)) { // Back
+        uv = block.getUV(World::BlockFace::Back);
+        u = uv.textureID / 16.0f;
         mesh.setBrightness(0.86f);
-        mesh.addTexture(u, v1);
+        mesh.addTexture(u, uv.v);
         mesh.addVertex(x1, y, z1);
-        mesh.addTexture(u1, v1);
+        mesh.addTexture(uv.u, uv.v);
         mesh.addVertex(x1, y, z);
-        mesh.addTexture(u1, v);
+        mesh.addTexture(uv.u, v);
         mesh.addVertex(x1, y1, z);
         mesh.addTexture(u, v);
         mesh.addVertex(x1, y1, z1);
