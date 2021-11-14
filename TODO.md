@@ -12,4 +12,4 @@
 * Implement new camera class
 * ~~Implement text rendering~~ **DONE**
 * ~~Clean up resource file structure~~ **DONE**
-* Make Game.keyPress() actually called on keypress rather than general key event (just an if statement in display.cpp should work for this)
+* ~~Make Game.keyPress() actually called on keypress rather than general key event (just an if statement in display.cpp should work for this)~~ **DONE**
