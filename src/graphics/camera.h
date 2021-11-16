@@ -29,6 +29,7 @@ public:
     float lastY;
     float pitch;
     float yaw;
+    bool firstMouse;
 private:
 };
 

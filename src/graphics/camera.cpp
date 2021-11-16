@@ -14,11 +14,6 @@ Camera::Camera(glm::vec3 pos)
 
 void Camera::update()
 {
-    direction.x = cos(glm::radians(yaw)) * cos(glm::radians(pitch));
-    direction.y = sin(glm::radians(pitch));
-    direction.z = sin(glm::radians(yaw)) * cos(glm::radians(pitch));
-    front = glm::normalize(direction);
-
     view = glm::lookAt(pos, pos+front, up);  
 }
 
@@ -44,6 +39,12 @@ void Camera::mouse(GLFWwindow* window, double xpos, double ypos)
 {
     Camera* camera = (Camera*)glfwGetWindowUserPointer(window);
 
+    if(camera->firstMouse) {
+        camera->lastX = xpos;
+        camera->lastY = ypos;
+        camera->firstMouse = false;
+    }
+
     // Calculate offsets
     float xOffset = xpos - camera->lastX;
     float yOffset = camera->lastY - ypos;
@@ -61,6 +62,11 @@ void Camera::mouse(GLFWwindow* window, double xpos, double ypos)
         camera->pitch = 89.0f;
     if(camera->pitch < -89.0f)
         camera->pitch = -89.0f;
+
+    camera->direction.x = cos(glm::radians(camera->yaw)) * cos(glm::radians(camera->pitch));
+    camera->direction.y = sin(glm::radians(camera->pitch));
+    camera->direction.z = sin(glm::radians(camera->yaw)) * cos(glm::radians(camera->pitch));
+    camera->front = glm::normalize(camera->direction);
 }
 
 }
