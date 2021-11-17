@@ -24,7 +24,7 @@ int Game::exec()
     glfwSwapBuffers(window);
 
     // Game setup
-    camera = new Graphics::Camera(glm::vec3(0.0f, 0.0f, 0.0f));
+    camera = new Graphics::Camera(glm::vec3(0.0f, 75.0f, 0.0f));
     level = new World::Level(256, 256, 256);
     World::Block::initBlocks();
 
@@ -32,8 +32,8 @@ int Game::exec()
     siv::PerlinNoise perlin(time(0));
     siv::PerlinNoise perlin2(rand());
     srand(time(0));
-    for(int i = 0; i < 256; i++) {
-        for(int j = 0; j < 256; j++) {
+    for(int i = 0; i < level->width; i++) {
+        for(int j = 0; j < level->height; j++) {
             int genHeight = (64 + (perlin.noise2D(i/100.0f, j/100.0f)) + perlin2.normalizedOctaveNoise2D(i/100.0f, j/100.0f, 4) * 32);
             for(int k = 0; k < genHeight; k++) {
 
@@ -43,9 +43,6 @@ int Game::exec()
                     level->setBlock(i, k, j, BLOCK_DIRT);
                 else // Otherwise generate stone
                     level->setBlock(i, k, j, BLOCK_STONE);
-
-                // Place the camera above the world
-                camera->pos.y = genHeight+6;
             }
         }
     }
