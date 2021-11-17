@@ -1,11 +1,8 @@
-#include "../graphics/renderers/blockrenderer.h"
 #include "level.h"
 #include "block.h"
 
 namespace World
 {
-
-Graphics::CubeRenderer* renderer;
 
 Level::Level(int width, int height, int depth)
 {
@@ -15,7 +12,30 @@ Level::Level(int width, int height, int depth)
     blocks = new int[width*height*depth];
     for(int i = 0; i < width*height*depth; i++)
         blocks[i] = BLOCK_AIR;
-    renderer = new Graphics::CubeRenderer();
+    chunks = new Chunk[(width/16)*(height/16)];
+    for(int i = 0; i < width/16; i++)
+        for(int j = 0; j < height/16; j++) {
+            Chunk newChunk(i, j, this);
+            chunks[j * (width/16) + i] = newChunk;
+        }
+}
+
+Chunk* Level::getChunk(int x, int z)
+{
+    return &chunks[z * (width/16) + x];
+}
+
+void Level::render(Graphics::Camera* camera)
+{
+    for(int i = 0; i < width/16; i++) {
+        for(int j = 0; j < height/16; j++) {
+            Chunk* chunk = getChunk(i, j);
+            if(chunk != nullptr)
+                chunk->render(camera);
+        }
+    }
+    //chunks[0].render(camera);
+    //chunks[1].render(camera);
 }
 
 void Level::setBlock(int x, int y, int z, int blockType)
@@ -27,26 +47,18 @@ void Level::setBlock(int x, int y, int z, int blockType)
     blocks[(y * height + z) * width + x] = blockType;
 }
 
-void Level::updateMesh()
-{
-    renderer->mesh.clear();
-    for(int i = 0; i < height; i++) {
-        for(int j = 0; j < width; j++) {
-            for(int k = 0; k < depth; k++) {
-                renderer->updateMesh(this, i, k, j, blocks[(k * height + j) * width + i]);
-            }
-        }
-    }
-}
-
 bool Level::isBlock(int x, int y, int z)
 {
     // Check if the block is outside of the level
     if(x < 0 || y < 0 || z < 0 || x >= width || y >= depth || z >= height)
         return false;
 
-    // TODO: Change this to a block transparency check
     return blocks[(y * height + z) * width + x] != BLOCK_AIR;
+}
+
+int Level::getBlock(int x, int y, int z)
+{
+    return blocks[(y * height + z) * width + x];
 }
 
 bool Level::isSolidBlock(int x, int y, int z)
@@ -54,13 +66,8 @@ bool Level::isSolidBlock(int x, int y, int z)
     return isBlock(x, y, z);
 }
 
-void Level::render(glm::vec3 pos, Graphics::Camera* camera)
-{
-    renderer->render(pos, camera);
-}
-
 void Level::updateAspect() {
-    renderer->updateAspect();
+
 }
 
 }

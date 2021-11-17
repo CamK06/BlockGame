@@ -25,15 +25,15 @@ int Game::exec()
 
     // Game setup
     camera = new Graphics::Camera(glm::vec3(0.0f, 32.0f, 0.0f));
-    level = new World::Level(128, 128, 256);
+    level = new World::Level(256, 256, 256);
     World::Block::initBlocks();
 
     // World generation
     siv::PerlinNoise perlin(time(0));
     siv::PerlinNoise perlin2(rand());
     srand(time(0));
-    for(int i = 0; i < 128; i++) {
-        for(int j = 0; j < 128; j++) {
+    for(int i = 0; i < 256; i++) {
+        for(int j = 0; j < 256; j++) {
             int genHeight = (64 + (perlin.noise2D(i/100.0f, j/100.0f)) + perlin2.normalizedOctaveNoise2D(i/100.0f, j/100.0f, 4) * 16);
             for(int k = 0; k < genHeight; k++) {
 
@@ -46,7 +46,6 @@ int Game::exec()
             }
         }
     }
-    level->updateMesh();
     
     glfwSetWindowUserPointer(window, camera);
     glfwSetCursorPosCallback(window, camera->mouse);
@@ -93,7 +92,7 @@ void Game::render()
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
     // Draw stuff
-    level->render(glm::vec3(0, -35, 0), camera);
+    level->render(camera);
 
     // FPS Display
     char fpsText[16];

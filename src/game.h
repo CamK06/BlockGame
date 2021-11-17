@@ -8,6 +8,7 @@
 
 #include "world/block.h"
 #include "world/level.h"
+#include "world/chunk.h"
 
 class Game
 {

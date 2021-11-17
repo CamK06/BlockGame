@@ -1,24 +1,30 @@
 #pragma once
 
 #include "block.h"
-#include "../graphics/renderers/blockrenderer.h"
+#include "chunk.h"
+
+#include <vector>
 
 namespace World
 {
+
+class Chunk;
 
 class Level
 {
 public:
     Level(int width, int height, int depth);
+    Chunk* getChunk(int x, int z);
     bool isSolidBlock(int x, int y, int z);
     bool isBlock(int x, int y, int z);
     void setBlock(int x, int y, int z, int blockType);
-    void render(glm::vec3 pos, Graphics::Camera* camera);
-    void updateMesh();
+    int getBlock(int x, int y, int z);
+    void render(Graphics::Camera* camera);
     void updateAspect();
 
 private:
     int width, height, depth;
+    Chunk* chunks;
     int* blocks;
 };
 
