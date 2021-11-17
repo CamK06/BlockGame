@@ -3,7 +3,6 @@
 #include <GL/glew.h>
 #include <GLFW/glfw3.h>
 
-#include "graphics/renderers/blockrenderer.h"
 #include "graphics/camera.h"
 
 #include "world/block.h"
@@ -36,7 +35,6 @@ private:
     int windowWidth = 1280;
     int windowHeight = 720;
 
-    Graphics::CubeRenderer* cube;
     Graphics::Camera* camera;
     World::Level* level;
 

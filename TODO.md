@@ -2,12 +2,11 @@
 * Clean up code - *this will always be in progress*
 * Implement AABB
 * Implement block breaking
-* Implement chunking
 * Implement proper mipmapping
-* Implement new camera class
 * Implement trees
 * Create separate worldgen class+file
 
+* ~~Implement chunking~~
 * ~~Implement lighting~~ **DONE** *lighting is really just pseudo-lighting
 * ~~Increase render distance~~ **DONE**
 * ~~Fix purple distance texture bug~~ **DONE**
