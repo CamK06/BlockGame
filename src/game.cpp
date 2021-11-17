@@ -24,7 +24,7 @@ int Game::exec()
     glfwSwapBuffers(window);
 
     // Game setup
-    camera = new Graphics::Camera(glm::vec3(0.0f, 32.0f, 0.0f));
+    camera = new Graphics::Camera(glm::vec3(0.0f, 0.0f, 0.0f));
     level = new World::Level(256, 256, 256);
     World::Block::initBlocks();
 
@@ -43,6 +43,9 @@ int Game::exec()
                     level->setBlock(i, k, j, BLOCK_DIRT);
                 else // Otherwise generate stone
                     level->setBlock(i, k, j, BLOCK_STONE);
+
+                // Place the camera above the world
+                camera->pos.y = genHeight+6;
             }
         }
     }

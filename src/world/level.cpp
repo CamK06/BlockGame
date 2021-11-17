@@ -34,8 +34,6 @@ void Level::render(Graphics::Camera* camera)
                 chunk->render(camera);
         }
     }
-    //chunks[0].render(camera);
-    //chunks[1].render(camera);
 }
 
 void Level::setBlock(int x, int y, int z, int blockType)
@@ -69,7 +67,7 @@ bool Level::isSolidBlock(int x, int y, int z)
 void Level::updateAspect() {
     for(int i = 0; i < width/16; i++) {
         for(int j = 0; j < height/16; j++) {
-            chunks[i].updateAspect();
+            chunks[j * (width/16) + i].updateAspect();
         }
     }
 }

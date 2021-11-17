@@ -19,7 +19,8 @@ void Chunk::render(Graphics::Camera* camera)
         isDirty = false;
     }
 
-    renderer->render(glm::vec3(0, -32, 0), camera);
+    // We offset the mesh by levelWidth/2-levelWidth (so, negative levelWidth/2) so that 0,0 is the center of the world
+    renderer->render(glm::vec3(level->width/2-level->width, 0, level->height/2-level->height), camera);
 }
 
 void Chunk::rebuild()

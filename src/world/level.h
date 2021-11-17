@@ -22,8 +22,9 @@ public:
     void render(Graphics::Camera* camera);
     void updateAspect();
 
-private:
     int width, height, depth;
+
+private:
     Chunk* chunks;
     int* blocks;
 };
