@@ -67,7 +67,11 @@ bool Level::isSolidBlock(int x, int y, int z)
 }
 
 void Level::updateAspect() {
-
+    for(int i = 0; i < width/16; i++) {
+        for(int j = 0; j < height/16; j++) {
+            chunks[i].updateAspect();
+        }
+    }
 }
 
 }

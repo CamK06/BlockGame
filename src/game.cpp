@@ -34,7 +34,7 @@ int Game::exec()
     srand(time(0));
     for(int i = 0; i < 256; i++) {
         for(int j = 0; j < 256; j++) {
-            int genHeight = (64 + (perlin.noise2D(i/100.0f, j/100.0f)) + perlin2.normalizedOctaveNoise2D(i/100.0f, j/100.0f, 4) * 16);
+            int genHeight = (64 + (perlin.noise2D(i/100.0f, j/100.0f)) + perlin2.normalizedOctaveNoise2D(i/100.0f, j/100.0f, 4) * 32);
             for(int k = 0; k < genHeight; k++) {
 
                 if(k == genHeight-1) // Generate grass on the top layer
