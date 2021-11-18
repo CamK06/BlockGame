@@ -10,6 +10,8 @@
 #define BLOCK_GRASS 0
 #define BLOCK_DIRT 1
 #define BLOCK_STONE 2
+#define BLOCK_LOG 3
+#define BLOCK_LEAVES 4
 
 namespace World
 {

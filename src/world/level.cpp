@@ -9,15 +9,27 @@ Level::Level(int width, int height, int depth)
     this->width = width;
     this->height = height;
     this->depth = depth;
+
+    // Create blocks
     blocks = new int[width*height*depth];
     for(int i = 0; i < width*height*depth; i++)
         blocks[i] = BLOCK_AIR;
+
+    // Create chunks
     chunks = new Chunk[(width/16)*(height/16)];
     for(int i = 0; i < width/16; i++)
         for(int j = 0; j < height/16; j++) {
             Chunk newChunk(i, j, this);
             chunks[j * (width/16) + i] = newChunk;
         }
+
+    // Create worldgen
+    worldGen = new Generator(this);
+}
+
+void Level::update()
+{
+    
 }
 
 Chunk* Level::getChunk(int x, int z)

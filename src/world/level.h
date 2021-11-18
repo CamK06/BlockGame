@@ -2,6 +2,7 @@
 
 #include "block.h"
 #include "chunk.h"
+#include "generator.h"
 
 #include <vector>
 
@@ -9,6 +10,7 @@ namespace World
 {
 
 class Chunk;
+class Generator;
 
 class Level
 {
@@ -21,8 +23,10 @@ public:
     int getBlock(int x, int y, int z);
     void render(Graphics::Camera* camera);
     void updateAspect();
+    void update();
 
     int width, height, depth;
+    Generator* worldGen;
 
 private:
     Chunk* chunks;

@@ -25,28 +25,13 @@ int Game::exec()
 
     // Game setup
     camera = new Graphics::Camera(glm::vec3(0.0f, 75.0f, 0.0f));
-    level = new World::Level(256, 256, 256);
+    level = new World::Level(128, 128, 256);
     World::Block::initBlocks();
 
-    // World generation
-    siv::PerlinNoise perlin(time(0));
-    siv::PerlinNoise perlin2(rand());
-    srand(time(0));
-    for(int i = 0; i < level->width; i++) {
-        for(int j = 0; j < level->height; j++) {
-            int genHeight = (64 + (perlin.noise2D(i/100.0f, j/100.0f)) + perlin2.normalizedOctaveNoise2D(i/100.0f, j/100.0f, 4) * 32);
-            for(int k = 0; k < genHeight; k++) {
+    // TEMP: Generate all chunks
+    for(int i = 0; i < level->width/16; i++)
+        level->worldGen->GenerateChunk(i, i);
 
-                if(k == genHeight-1) // Generate grass on the top layer
-                    level->setBlock(i, k, j, BLOCK_GRASS);
-                else if(k >= genHeight-4) // Generate dirt if we're in the top 3 blocks under the grass
-                    level->setBlock(i, k, j, BLOCK_DIRT);
-                else // Otherwise generate stone
-                    level->setBlock(i, k, j, BLOCK_STONE);
-            }
-        }
-    }
-    
     glfwSetWindowUserPointer(window, camera);
     glfwSetCursorPosCallback(window, camera->mouse);
 

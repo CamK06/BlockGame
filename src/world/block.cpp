@@ -46,11 +46,17 @@ void Block::initBlocks()
 
     Block dirt(2);
     Block stone(3);
+    Block log(4);
+    log.setFaceTex(BlockFace::Up, 5);
+    log.setFaceTex(BlockFace::Down, 5);
+    Block leaves(6);
 
     // Add all blocks *IN ORDER!*
     blocks.push_back(grass);
     blocks.push_back(dirt);
     blocks.push_back(stone);
+    blocks.push_back(log);
+    blocks.push_back(leaves);
 }
 
 }
