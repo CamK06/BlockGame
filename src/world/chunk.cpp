@@ -10,19 +10,10 @@ Chunk::Chunk(int x, int z, Level* level)
     this->z = z;
     this->renderer = new Graphics::ChunkRenderer(this, level);
     isDirty = false;
-    worker = new std::thread(&Chunk::rebuild, this);
 }
 
 void Chunk::render(Graphics::Camera* camera)
 {
-    if(isDirty) {
-        if(workerRunning)
-            return;
-        workerRunning = true;
-        worker = new std::thread(&Chunk::rebuild, this);
-        return;
-    }
-
     // We offset the mesh by levelWidth/2-levelWidth (so, negative levelWidth/2) so that 0,0 is the center of the world
     //renderer->render(glm::vec3(level->width/2-level->width, 0, level->height/2-level->height), camera);
     renderer->render(glm::vec3(0, 0, 0), camera);
@@ -30,18 +21,14 @@ void Chunk::render(Graphics::Camera* camera)
 
 void Chunk::rebuild()
 {
-    if(!workerRunning)
-        return;
-
     renderer->clearMesh();
     for(int i = 0; i < CHUNK_WIDTH; i++)
         for(int j = 0; j < CHUNK_HEIGHT; j++)
-            for(int k = 0; k < CHUNK_DEPTH; k++) {
+            for(int k = 0; k < CHUNK_DEPTH; k++) 
                 renderer->addBlockToMesh(i+(x*CHUNK_WIDTH), k, j+(z*CHUNK_HEIGHT), level->getBlock(i+(x*CHUNK_WIDTH), k, j+(z*CHUNK_HEIGHT)));
-            }
 
     isDirty = false;
-    workerRunning = false;
+    hasMesh = true;
 }
 
 void Chunk::updateAspect() { renderer->updateAspect(); }

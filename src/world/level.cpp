@@ -46,10 +46,8 @@ void Level::chunkWorker()
         for(int i = -3; i < 3; i++) {
             for(int j = -3; j < 3; j++) { 
                 Chunk* chunk = getChunk(cx+i, cy+j);
-                if(chunk != nullptr && !chunk->hasMesh) {
-                    chunk->isDirty = true;
-                    chunk->hasMesh = true;
-                }
+                if(chunk != nullptr && !chunk->hasMesh)
+                    chunk->rebuild();
             }
         }
     }

@@ -2,7 +2,6 @@
 
 #include "../graphics/renderers/chunkrenderer.h"
 #include "../graphics/camera.h"
-#include <thread>
 
 #define CHUNK_WIDTH 16
 #define CHUNK_HEIGHT 16
@@ -34,9 +33,6 @@ public:
 private:
     Graphics::ChunkRenderer* renderer;
     Level* level;
-
-    std::thread* worker;
-    bool workerRunning = false;
 };
 
 }
