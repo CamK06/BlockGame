@@ -4,7 +4,7 @@
 #include "chunk.h"
 #include "generator.h"
 
-#include <vector>
+#include <thread>
 
 namespace World
 {
@@ -15,22 +15,31 @@ class Generator;
 class Level
 {
 public:
-    Level(int width, int height, int depth);
-    Chunk* getChunk(int x, int z);
+    Level(int width, int height, int depth, Graphics::Camera* camera);
+    
+    void render();
+    void updateAspect();
+    void chunkWorker();
+
     bool isSolidBlock(int x, int y, int z);
     bool isBlock(int x, int y, int z);
     void setBlock(int x, int y, int z, int blockType);
     int getBlock(int x, int y, int z);
-    void render(Graphics::Camera* camera);
-    void updateAspect();
-    void update();
+    Chunk* getChunk(int x, int z);
+    void regenChunks();
+
+    void cleanup();
 
     int width, height, depth;
     Generator* worldGen;
 
 private:
     Chunk* chunks;
+    Graphics::Camera* camera;
     int* blocks;
+
+    std::thread chunkWorkerThread;
+    bool isWorkerRunning = true;
 };
 
 }

@@ -1,5 +1,6 @@
 # TODO
 * Clean up code - *this will always be in progress*
+* Clean up chunk rendering multithread code (it's all just a hackjob right now)
 * Implement AABB
 * Implement block breaking
 * Implement proper mipmapping

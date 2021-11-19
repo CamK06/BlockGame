@@ -25,12 +25,13 @@ int Game::exec()
 
     // Game setup
     camera = new Graphics::Camera(glm::vec3(0.0f, 75.0f, 0.0f));
-    level = new World::Level(128, 128, 256);
+    level = new World::Level(512, 512, 256, camera);
     World::Block::initBlocks();
 
     // TEMP: Generate all chunks
     for(int i = 0; i < level->width/16; i++)
         level->worldGen->GenerateChunk(i, i);
+    //level->regenChunks();
 
     glfwSetWindowUserPointer(window, camera);
     glfwSetCursorPosCallback(window, camera->mouse);
@@ -77,11 +78,11 @@ void Game::render()
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
     // Draw stuff
-    level->render(camera);
+    level->render();
 
     // FPS Display
     char fpsText[16];
-    char coordsText[32];
+    char coordsText[64];
     sprintf(fpsText, "FPS: %d", fps);
     Ui::DisplayText(fpsText, 10, windowHeight-40, 1.0f, glm::vec3(1.0f, 1.0f, 1.0f), false);
 
@@ -108,8 +109,10 @@ void Game::keyPressed(int key)
         }
     }
     // Escape to exit
-    if(key == GLFW_KEY_ESCAPE)
+    if(key == GLFW_KEY_ESCAPE) {
+        level->cleanup();
         glfwSetWindowShouldClose(window, true);
+    }
 }
 
 void Game::keyReleased(int key)

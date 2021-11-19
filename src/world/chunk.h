@@ -2,6 +2,7 @@
 
 #include "../graphics/renderers/chunkrenderer.h"
 #include "../graphics/camera.h"
+#include <thread>
 
 #define CHUNK_WIDTH 16
 #define CHUNK_HEIGHT 16
@@ -27,12 +28,15 @@ public:
 
     int x;
     int z;
+    bool isDirty;
+    bool hasMesh = false;
 
 private:
     Graphics::ChunkRenderer* renderer;
     Level* level;
 
-    bool isDirty;
+    std::thread* worker;
+    bool workerRunning = false;
 };
 
 }
