@@ -43,6 +43,7 @@ void Level::chunkWorker()
 
         // Check and build all chunks in a 3x3 grid around the player
         // TODO: Make the distance adjustable & clean up code
+        // TODO: Fix possible bug where chunks far from player get built
         for(int i = -3; i < 3; i++) {
             for(int j = -3; j < 3; j++) { 
                 Chunk* chunk = getChunk(cx+i, cy+j);

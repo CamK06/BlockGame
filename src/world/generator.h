@@ -17,6 +17,7 @@ public:
 private:
     Level* level;
     siv::PerlinNoise noise;
+    siv::PerlinNoise noise2;
 };
 
 }
