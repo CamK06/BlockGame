@@ -31,7 +31,7 @@ public:
     void cleanup();
 
     int width, height, depth;
-    int renderDistance = 3;
+    int renderDistance = 6;
     Generator* worldGen;
 
 private:

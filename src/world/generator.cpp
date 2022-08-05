@@ -11,7 +11,7 @@ Generator::Generator(Level* level)
     noise2.reseed(rand());
 }
 
-void Generator::GenerateChunk(int x, int z)
+void Generator::generateChunk(int x, int z)
 {
     for(int i = 0; i < 16+(x*16); i++) {
         for(int j = 0; j < 16+(z*16); j++) {

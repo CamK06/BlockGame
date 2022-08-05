@@ -28,11 +28,6 @@ int Game::exec()
     level = new World::Level(128, 128, 256, camera);
     World::Block::initBlocks();
 
-    // TEMP: Generate all chunks
-    for(int i = 0; i < level->width/16; i++)
-        level->worldGen->GenerateChunk(i, i);
-    //level->regenChunks();
-
     glfwSetWindowUserPointer(window, camera);
     glfwSetCursorPosCallback(window, camera->mouse);
 

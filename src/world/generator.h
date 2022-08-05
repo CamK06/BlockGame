@@ -12,7 +12,7 @@ class Generator
 {
 public:
     Generator(Level* level);
-    void GenerateChunk(int x, int z);
+    void generateChunk(int x, int z);
 
 private:
     Level* level;

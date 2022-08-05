@@ -41,16 +41,19 @@ void Level::chunkWorker()
         int cx = (int)camera->pos.x/16;
         int cy = (int)camera->pos.z/16;
 
-        // Rebuild chunks within a 3x3 range of the camera
+        // Rebuild chunks within the render distance
         for(int i = cx-renderDistance; i <= cx+renderDistance; i++)
             for(int j = cy-renderDistance; j <= cy+renderDistance; j++) {
                 if(i < 0 || i >= width/16 || j < 0 || j >= height/16)
                     continue;
-                if(chunks[j * (width/16) + i].isDirty)
+                
+                if(chunks[j * (width/16) + i].isDirty) {
+                    worldGen->generateChunk(i, j);
                     chunks[j * (width/16) + i].rebuild();
+                }
             }
 
-        // Destroy chunks outside of a 3x3 range of the camera
+        // Destroy chunks outside of the render distance
         for(int i = 0; i < width/16; i++)
             for(int j = 0; j < height/16; j++) {
                 if(i < cx-renderDistance || i > cx+renderDistance || j < cy-renderDistance || j > cy+renderDistance)
