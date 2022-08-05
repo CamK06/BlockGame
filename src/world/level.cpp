@@ -41,16 +41,21 @@ void Level::chunkWorker()
         int cx = (int)camera->pos.x/16;
         int cy = (int)camera->pos.z/16;
 
-        // Check and build all chunks in a 3x3 grid around the player
-        // TODO: Make the distance adjustable & clean up code
-        // TODO: Fix possible bug where chunks far from player get built
-        for(int i = -3; i < 3; i++) {
-            for(int j = -3; j < 3; j++) { 
-                Chunk* chunk = getChunk(cx+i, cy+j);
-                if(chunk != nullptr && !chunk->hasMesh)
-                    chunk->rebuild();
+        // Rebuild chunks within a 3x3 range of the camera
+        for(int i = cx-renderDistance; i <= cx+renderDistance; i++)
+            for(int j = cy-renderDistance; j <= cy+renderDistance; j++) {
+                if(i < 0 || i >= width/16 || j < 0 || j >= height/16)
+                    continue;
+                if(chunks[j * (width/16) + i].isDirty)
+                    chunks[j * (width/16) + i].rebuild();
             }
-        }
+
+        // Destroy chunks outside of a 3x3 range of the camera
+        for(int i = 0; i < width/16; i++)
+            for(int j = 0; j < height/16; j++) {
+                if(i < cx-renderDistance || i > cx+renderDistance || j < cy-renderDistance || j > cy+renderDistance)
+                    chunks[j * (width/16) + i].destroy();
+            }
     }
 }
 
@@ -59,7 +64,7 @@ void Level::render()
     for(int i = 0; i < width/16; i++) {
         for(int j = 0; j < height/16; j++) {
             Chunk* chunk = getChunk(i, j);
-            if(chunk != nullptr)
+            if(chunk != nullptr && chunk->hasMesh)
                 chunk->render(camera);
         }
     }
@@ -69,7 +74,6 @@ void Level::cleanup()
 {
     isWorkerRunning = false;
     if(chunkWorkerThread.joinable()) { chunkWorkerThread.join(); }
-    delete chunks;
 }
 
 void Level::updateAspect() {
@@ -100,6 +104,8 @@ bool Level::isBlock(int x, int y, int z)
 
 int Level::getBlock(int x, int y, int z)
 {
+    if(x < 0 || y < 0 || z < 0 || x >= width || y >= depth || z >= height)
+        return BLOCK_AIR;
     return blocks[(y * height + z) * width + x];
 }
 
@@ -110,6 +116,9 @@ bool Level::isSolidBlock(int x, int y, int z)
 
 Chunk* Level::getChunk(int x, int z)
 {
+    if(x < 0 && z < 0)
+        return nullptr;
+
     int index = z * (width/16) + x;
     if(index < 0 || index > (width/16)*(height/16))
         return nullptr;

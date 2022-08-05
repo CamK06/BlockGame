@@ -9,7 +9,7 @@ Chunk::Chunk(int x, int z, Level* level)
     this->x = x;
     this->z = z;
     this->renderer = new Graphics::ChunkRenderer(this, level);
-    isDirty = false;
+    isDirty = true;
 }
 
 void Chunk::render(Graphics::Camera* camera)
@@ -29,6 +29,13 @@ void Chunk::rebuild()
 
     isDirty = false;
     hasMesh = true;
+}
+
+void Chunk::destroy()
+{
+    renderer->clearMesh();
+    hasMesh = false;
+    isDirty = true;
 }
 
 void Chunk::updateAspect() { renderer->updateAspect(); }

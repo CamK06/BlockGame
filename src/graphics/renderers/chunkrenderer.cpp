@@ -143,9 +143,12 @@ void ChunkRenderer::addBlockToMesh(int x, int y, int z, int blockType)
 
 void ChunkRenderer::render(glm::vec3 pos, Camera* camera)
 {
+    if(mesh.getNumVertices() <= 0)
+        return;
+
     // TODO: Move this VBO updating to a better location
     glBindBuffer(GL_ARRAY_BUFFER, VBO);
-    glBufferData(GL_ARRAY_BUFFER, mesh.getNumVertices() * sizeof(float), mesh.getVertices(), GL_STATIC_DRAW);
+    glBufferData(GL_ARRAY_BUFFER, mesh.getNumVertices() * sizeof(float), mesh.getVertices(), GL_DYNAMIC_DRAW);
 
     shader->use();
     textureAtlas->use();
@@ -154,6 +157,8 @@ void ChunkRenderer::render(glm::vec3 pos, Camera* camera)
     glm::mat4 model = glm::mat4(1.0f);
     model = glm::translate(model, pos);
 
+    unsigned int renderDistLoc = glGetUniformLocation(shader->ID, "renderDistance");
+    glUniform1i(renderDistLoc, level->renderDistance);
     unsigned int modelLoc = glGetUniformLocation(shader->ID, "model");
     glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
     unsigned int viewLoc = glGetUniformLocation(shader->ID, "view");

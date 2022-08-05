@@ -9,10 +9,9 @@ in float brightness;
 in vec3 camPos;
 
 uniform sampler2D textureSampler;
+uniform int renderDistance = 3;
 
 const vec4 fogColour = vec4(0, 0.5, 0.8, 1.0);
-const float fogNear = (16 * 16) - 24;
-const float fogFar = (16 * 16 ) - 12;
 
 void main()
 {
@@ -21,6 +20,8 @@ void main()
         discard;
     color = outColour;
 
+    float fogNear = (16 * (renderDistance+1)) - 24;
+    float fogFar = (16 * (renderDistance+1)) - 12;
     float fog = smoothstep(fogNear, fogFar, length(camPos));
     color = mix(color, fogColour, fog);
 }

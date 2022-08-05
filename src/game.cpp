@@ -25,7 +25,7 @@ int Game::exec()
 
     // Game setup
     camera = new Graphics::Camera(glm::vec3(0.0f, 75.0f, 0.0f));
-    level = new World::Level(512, 512, 256, camera);
+    level = new World::Level(128, 128, 256, camera);
     World::Block::initBlocks();
 
     // TEMP: Generate all chunks

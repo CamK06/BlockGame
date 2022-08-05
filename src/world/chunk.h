@@ -24,6 +24,7 @@ public:
     void render(Graphics::Camera* camera);
     void rebuild();
     void updateAspect();
+    void destroy();
 
     int x;
     int z;
